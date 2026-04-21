@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreta 2026 · Ferienprogramm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sea: #1a6b8a;
+    --sea-light: #2899c4;
+    --sand: #e8d5a3;
+    --sand-dark: #c4a96b;
+    --olive: #5a7a3a;
+    --white: #faf8f3;
+    --ink: #1c1a15;
+    --terracotta: #c4663a;
+    --free-day: #5a7a3a;
+    --activity: #1a6b8a;
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–white);
+color: var(–ink);
+font-family: ‘Crimson Pro’, Georgia, serif;
+font-weight: 300;
+min-height: 100vh;
+}
+
+/* HEADER */
+.hero {
+background: linear-gradient(160deg, #0d3d52 0%, #1a6b8a 50%, #2899c4 100%);
+padding: 56px 32px 48px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.hero::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: url(“data:image/svg+xml,%3Csvg width=‘60’ height=‘60’ viewBox=‘0 0 60 60’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cg fill=‘none’ fill-rule=‘evenodd’%3E%3Cg fill=’%23ffffff’ fill-opacity=‘0.04’%3E%3Cpath d=‘M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z’/%3E%3C/g%3E%3C/g%3E%3C/svg%3E”);
+opacity: 0.5;
+}
+.hero-eyebrow {
+font-family: ‘Crimson Pro’, serif;
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–sand);
+margin-bottom: 16px;
+opacity: 0.9;
+}
+.hero h1 {
+font-family: ‘Playfair Display’, Georgia, serif;
+font-size: clamp(38px, 7vw, 72px);
+font-weight: 700;
+color: #fff;
+line-height: 1.05;
+margin-bottom: 12px;
+}
+.hero h1 em {
+font-style: italic;
+color: var(–sand);
+}
+.hero-sub {
+font-size: 18px;
+color: rgba(255,255,255,0.75);
+margin-bottom: 32px;
+font-weight: 300;
+}
+.hero-meta {
+display: inline-flex;
+gap: 24px;
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 40px;
+padding: 10px 28px;
+font-size: 14px;
+color: rgba(255,255,255,0.85);
+letter-spacing: 0.5px;
+flex-wrap: wrap;
+justify-content: center;
+}
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+/* LEGEND */
+.legend {
+display: flex;
+justify-content: center;
+gap: 24px;
+padding: 20px 32px;
+background: var(–sand);
+flex-wrap: wrap;
+}
+.legend-item {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-sea { background: var(–sea); }
+.dot-olive { background: var(–olive); }
+.dot-terra { background: var(–terracotta); }
+
+/* FILTERS */
+.filters {
+display: flex;
+justify-content: center;
+gap: 10px;
+padding: 24px 32px;
+flex-wrap: wrap;
+}
+.filter-btn {
+padding: 7px 20px;
+border-radius: 20px;
+border: 1.5px solid currentColor;
+background: transparent;
+cursor: pointer;
+font-family: ‘Crimson Pro’, serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: 0.5px;
+transition: all 0.2s;
+}
+.filter-btn.all { color: var(–ink); }
+.filter-btn.all.active, .filter-btn.all:hover { background: var(–ink); color: var(–white); }
+.filter-btn.free { color: var(–olive); }
+.filter-btn.free.active, .filter-btn.free:hover { background: var(–olive); color: #fff; }
+.filter-btn.activity { color: var(–sea); }
+.filter-btn.activity.active, .filter-btn.activity:hover { background: var(–sea); color: #fff; }
+
+/* TIMELINE */
+.timeline {
+max-width: 880px;
+margin: 0 auto;
+padding: 0 24px 80px;
+}
+
+.week-header {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px;
+font-weight: 700;
+color: var(–sea);
+padding: 32px 0 12px;
+border-bottom: 2px solid var(–sand-dark);
+margin-bottom: 4px;
+letter-spacing: 0.5px;
+}
+
+.day-card {
+display: flex;
+gap: 0;
+margin: 12px 0;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+transition: transform 0.2s, box-shadow 0.2s;
+cursor: pointer;
+}
+.day-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
+
+.day-sidebar {
+width: 80px;
+min-width: 80px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 16px 8px;
+text-align: center;
+}
+.day-card.type-free .day-sidebar { background: var(–olive); }
+.day-card.type-activity .day-sidebar { background: var(–sea); }
+.day-card.type-arrival .day-sidebar { background: var(–terracotta); }
+
+.day-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 30px;
+font-weight: 700;
+color: #fff;
+line-height: 1;
+}
+.day-label {
+font-size: 10px;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: rgba(255,255,255,0.8);
+margin-top: 4px;
+}
+.day-type-badge {
+margin-top: 10px;
+font-size: 18px;
+}
+
+.day-body {
+flex: 1;
+padding: 18px 22px;
+background: #fff;
+border: 1px solid #eee;
+border-left: none;
+border-radius: 0 12px 12px 0;
+}
+.day-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 18px;
+font-weight: 700;
+color: var(–ink);
+margin-bottom: 4px;
+}
+.day-card.type-free .day-title { color: var(–olive); }
+.day-card.type-arrival .day-title { color: var(–terracotta); }
+
+.day-drive {
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.5px;
+color: var(–sand-dark);
+text-transform: uppercase;
+margin-bottom: 8px;
+}
+.day-desc {
+font-size: 15.5px;
+line-height: 1.65;
+color: #444;
+}
+
+.highlights {
+display: block;
+margin-top: 14px;
+padding-top: 14px;
+border-top: 1px dashed #ddd;
+}
+.highlights.closed { display: none; }
+.highlight-item {
+display: flex;
+gap: 8px;
+margin-bottom: 6px;
+font-size: 14.5px;
+line-height: 1.5;
+color: #333;
+}
+.highlight-item::before {
+content: ‘✦’;
+color: var(–sand-dark);
+font-size: 12px;
+margin-top: 3px;
+flex-shrink: 0;
+}
+.toggle-btn {
+margin-top: 10px;
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.5px;
+color: var(–sea);
+background: none;
+border: none;
+cursor: pointer;
+padding: 0;
+text-decoration: underline;
+text-underline-offset: 2px;
+font-family: ‘Crimson Pro’, serif;
+}
+.day-card.type-free .toggle-btn { color: var(–olive); }
+.day-card.type-arrival .toggle-btn { color: var(–terracotta); }
+
+.map-link {
+display: inline-flex;
+align-items: center;
+gap: 5px;
+margin-top: 8px;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.5px;
+color: var(–sea);
+text-decoration: none;
+border: 1px solid var(–sea);
+border-radius: 12px;
+padding: 3px 10px;
+transition: background 0.15s, color 0.15s;
+}
+.map-link:hover { background: var(–sea); color: #fff; }
+.day-card.type-free .map-link { color: var(–olive); border-color: var(–olive); }
+.day-card.type-free .map-link:hover { background: var(–olive); color: #fff; }
+.day-card.type-arrival .map-link { color: var(–terracotta); border-color: var(–terracotta); }
+.day-card.type-arrival .map-link:hover { background: var(–terracotta); color: #fff; }
+
+.toggle-btn::after { content: ’ ↑’; }
+.hidden { display: none !important; }
+
+/* FOOTER */
+.footer {
+background: var(–ink);
+color: rgba(255,255,255,0.6);
+text-align: center;
+padding: 28px;
+font-size: 13px;
+letter-spacing: 0.5px;
+}
+.footer strong { color: var(–sand); }
+
+@media (max-width: 600px) {
+.day-sidebar { width: 64px; min-width: 64px; }
+.day-num { font-size: 24px; }
+.day-body { padding: 14px 16px; }
+.day-title { font-size: 16px; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">🇬🇷 Kreta 2026 · Persönliches Reiseprogramm</div>
+  <h1>Καλημέρα,<br><em>Chania!</em></h1>
+  <p class="hero-sub">16. – 30. Mai 2026 · 4 Personen · Privathaus mit Pool</p>
+  <div class="hero-meta">
+    <span>📅 15 Tage</span>
+    <span>🚗 Mietauto</span>
+    <span>🏖️ Region Chania</span>
+    <span>🌡️ ~25°C, sonnig</span>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-sea"></div> Ausflugstag</div>
+  <div class="legend-item"><div class="dot dot-olive"></div> Freier Tag</div>
+  <div class="legend-item"><div class="dot dot-terra"></div> An-/Abreise</div>
+  <div style="font-size:13px; color:#666; align-self:center;">→ Jede Karte öffnet Google Maps</div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn all active" onclick="filter('all', this)">Alle Tage</button>
+  <button class="filter-btn activity" onclick="filter('activity', this)">Nur Ausflüge</button>
+  <button class="filter-btn free" onclick="filter('free', this)">Nur Freitage</button>
+</div>
+
+<div class="timeline" id="timeline">
+
+  <div class="week-header">Woche 1 · 16. – 22. Mai</div>
+
+  <!-- Tag 1 -->
+
+  <div class="day-card type-arrival" data-type="arrival">
+    <div class="day-sidebar">
+      <div class="day-num">16</div>
+      <div class="day-label">Mai · Sa</div>
+      <div class="day-type-badge">✈️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Ankunft in Heraklion & Fahrt nach Chania</div>
+      <div class="drive">✈️ Flughafen Heraklion (HER) → Unterkunft: ~2 Std. 15 Min. (Autobahn E75 West)</div>
+      <div class="day-desc">Ankunft am Flughafen Heraklion, Mietauto abholen und die schöne Fahrt westlich nach Chania geniessen. Die Autobahn E75 führt entlang der Nordküste — erste Eindrücke des kretischen Meeres inklusive. Ankunft, Einkauf, Bezug des Hauses, erster Abend auf der Terrasse.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Heraklion+Airport+Crete" target="_blank">📍 Flughafen Heraklion</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Heraklion Airport (HER): grösster Flughafen Kretas, gut ausgebaut — Mietauto-Stationen direkt im Terminal.</div>
+        <div class="highlight-item">Fahrtipp: Autobahn E75 bis Chania ist mautpflichtig (ca. 3–4 €) — Kleingeld bereithalten oder Karte.</div>
+        <div class="highlight-item">Stopp-Option unterwegs: Rethymno (ca. 1 Std. ab HER) für ersten Kaffee — oder direkt durch nach Chania.</div>
+        <div class="highlight-item">Erste Kostprobe am Abend: Tsikoudia (kretischer Tresterbrand) — offiziell zur Begrüssung, nicht zur Fahrtüchtigkeit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 2 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">17</div>
+      <div class="day-label">Mai · So</div>
+      <div class="day-type-badge">🏛️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Chania Altstadt — venezianisches Juwel</div>
+      <div class="drive">🚗 Ca. 15–20 Min. von der Unterkunft</div>
+      <div class="day-desc">Die Altstadt von Chania gehört zu den schönsten mediterranen Städten überhaupt. Der venezianische Hafen mit dem ikonischen Leuchtturm, die überdachte Markthalle (Agora), enge Gassen mit Boutiquen und Tavernas — ein ganzer Tag reicht kaum.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Chania+Old+Town+Crete" target="_blank">📍 Chania Altstadt</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Venezianischer Leuchtturm und Hafenpromenade — Spaziergang morgens, wenn die Kreuzfahrtgruppen noch schlafen.</div>
+        <div class="highlight-item">Archäologisches Museum Chania (im ehemaligen Kloster San Francesco) — überschaubar gross, sehr sehenswert.</div>
+        <div class="highlight-item">Agora-Markthalle: frische Oliven, lokaler Käse (Graviera, Anthotyros), Kräuter, Honig — ideales kulinarisches Einkaufserlebnis.</div>
+        <div class="highlight-item">Mittagessen im Splantzia-Viertel: weniger touristisch, authentischer, günstiger.</div>
+        <div class="highlight-item">Abends: Sundowner am Leuchtturm mit Blick auf die Weissgebirge (Lefka Ori).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 3 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">18</div>
+      <div class="day-label">Mai · Mo</div>
+      <div class="day-type-badge">🥾</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Samaria-Schlucht — Europas grösste Klamm</div>
+      <div class="drive">🚗 Ca. 45–55 Min. bis Xyloskalo (Eingang oben)</div>
+      <div class="day-desc">Die Samaria-Schlucht (16 km, ca. 5–6 Std. Gehzeit) ist das Highlight Westkretas. Man wandert bergab von 1.227 m bis ans Meer. Am Ende Bootsfahrt nach Hora Sfakion, Bus zurück zum Auto. Für 55+ sehr machbar — gute Schuhe und Wasser sind Pflicht.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Xyloskalo+Samaria+Gorge+Crete" target="_blank">📍 Eingang Xyloskalo</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Die «Eiserne Pforte» (Sideroportes): nur 3 m breit, 300 m hohe Felswände — dramatischste Stelle der Wanderung.</div>
+        <div class="highlight-item">Kretische Steinböcke (Agrimi/Kri-Kri) sind hier heimisch und oft zu sehen.</div>
+        <div class="highlight-item">Das verlassene Dorf Samaria mitten in der Schlucht ist gespenstisch schön.</div>
+        <div class="highlight-item">Mai: Schlucht noch nicht überfüllt (Hochsaison ist Juli/August), Temperatur angenehm.</div>
+        <div class="highlight-item">Tipp: Frühstart (7:00 Uhr) — Parkplatz Xyloskalo, dann gehts bergab. Abend in Hora Sfakion vor der Rückfahrt: frischer Fisch direkt am Hafen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 4 -->
+
+  <div class="day-card type-free" data-type="free">
+    <div class="day-sidebar">
+      <div class="day-num">19</div>
+      <div class="day-label">Mai · Di</div>
+      <div class="day-type-badge">🏊</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Freier Tag — Pool & Erholung</div>
+      <div class="drive">Kein Ausflug — Zuhause oder lokales Shopping</div>
+      <div class="day-desc">Nach der Samaria-Wanderung werden die Beine eine Pause zu schätzen wissen. Pool, Liegestuhl, ein gutes Buch und das Mittagessen auf der Terrasse. Wer möchte: kleines lokales Shopping in den umliegenden Dörfern oder Supermarkt-Rundgang für Vorräte.</div>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Lokale Dorfläden: kretisches Olivenöl, Thymian-Honig und handgemachte Seife — perfekte Mitbringsel.</div>
+        <div class="highlight-item">Abends: Selbst kochen mit Markt-Einkäufen von Chania — kretische Küche ist einfach und köstlich (Dakos, gegrillter Fisch, Spanakopita).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 5 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">20</div>
+      <div class="day-label">Mai · Mi</div>
+      <div class="day-type-badge">🏖️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Balos Lagune & Gramvousa-Halbinsel</div>
+      <div class="drive">🚗 Ca. 55–65 Min. bis Kaliviani (Parkplatz), dann 20 Min. Fussmarsch</div>
+      <div class="day-desc">Balos ist der ikonischste Strand Kretas — türkisfarbene Lagune, weisser Sand, türkisblaues Wasser. Im Mai noch ruhig. Alternativ: Bootsfahrt ab Kissamos (entspannter, kein Fussmarsch). Die benachbarte Insel Gramvousa beherbergt eine venezianische Festung.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Balos+Lagoon+Crete" target="_blank">📍 Balos Lagune</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Balos Lagune: flaches, warmes, kristallklares Wasser — ideal zum Schnorcheln.</div>
+        <div class="highlight-item">Gramvousa-Insel: venezianische Festung aus dem 16. Jh., Piratengeschichte inklusive.</div>
+        <div class="highlight-item">Tipp: Per Fuss (20 Min. steil bergab) ist gratis; Bootsfahrt ab Kissamos ca. 25€/Person, komfortabler.</div>
+        <div class="highlight-item">Im Mai ist das Wasser noch ca. 20–21°C — für Mutige bereits badetauglich.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 6 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">21</div>
+      <div class="day-label">Mai · Do</div>
+      <div class="day-type-badge">🍷</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Kulinarische Rundfahrt — Olivenöl, Wein & Käse</div>
+      <div class="drive">🚗 Rundkurs ab Unterkunft: 60–90 Min. Gesamt-Fahrstrecke</div>
+      <div class="day-desc">Kretas kulinarisches Erbe ist ausserordentlich. Diese Rundfahrt führt zu einem Olivenöl-Produzenten, einer Winzerei (Manousakis Winery in Vatolakkos) und einem Käseproduzenten. Die meisten bieten Führungen mit Degustation an — anmelden im Voraus empfohlen.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Manousakis+Winery+Vatolakkos+Crete" target="_blank">📍 Manousakis Winery</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Manousakis Winery (Vatolakkos, ~25 Min.): bio-zertifiziert, Rhône-Sorten auf Kreta — überraschend elegant. Weinprobe mit Meerblick.</div>
+        <div class="highlight-item">Olivenöl-Kooperative in der Region: Kaltpressung live erleben, Direktkauf zum Ortspreis.</div>
+        <div class="highlight-item">Graviera-Käse: kretischer Hartkäse, oft direkt beim Hersteller zu kaufen — Qualität wie Greyerzer, kretisch interpretiert.</div>
+        <div class="highlight-item">Mittagessen in einem Agrotourismus-Betrieb: typisch kretisch, üppig, günstig.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 7 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">22</div>
+      <div class="day-label">Mai · Fr</div>
+      <div class="day-type-badge">🏘️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Apokoronas-Region & Versteckte Dörfer</div>
+      <div class="drive">🚗 Ca. 20–35 Min. bis Vamos/Gavalochori</div>
+      <div class="day-desc">Die Hügelregion östlich von Chania ist gespickt mit authentischen venezianisch-türkischen Bergdörfern. Vamos, Gavalochori, Drapanos — hier lebt das alte Kreta. Keine Touristenbusse, echte Tavernen, atemberaubende Ausblicke auf den Souda-Golf.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Gavalochori+Crete" target="_blank">📍 Gavalochori</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Gavalochori: volkskundliches Museum mit kretischer Spitzenklöppelei (Kopaneli) — kleines Dorf, grosses Kulturerbe.</div>
+        <div class="highlight-item">Vamos: pittoreskes Dorf, mehrere hervorragende Tavernen, lebhafter Dorfplatz.</div>
+        <div class="highlight-item">Lake Kournas (einziger Süsswassersee Kretas, ~30 Min.): idyllischer Stopp, Tretboot möglich, Enten inklusive.</div>
+        <div class="highlight-item">Aussichtspunkt Drapanos: Panoramablick auf die Bucht von Souda — einer der schönsten Viewpoints der Region.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-header">Woche 2 · 23. – 29. Mai</div>
+
+  <!-- Tag 8 -->
+
+  <div class="day-card type-free" data-type="free">
+    <div class="day-sidebar">
+      <div class="day-num">23</div>
+      <div class="day-label">Mai · Sa</div>
+      <div class="day-type-badge">🏊</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Freier Tag — Pool, Shopping & Markt</div>
+      <div class="drive">Kein Pflichtprogramm</div>
+      <div class="day-desc">Samstag in Chania: Der Wochenmarkt (Laiki Agora) ist ein Erlebnis für sich. Frische Produkte, lokale Händler, Menschentreiben — ideal für den Grosseinkauf der zweiten Woche. Nachmittag am Pool, Abend frei gestalten.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Chania+Municipal+Market+Agora" target="_blank">📍 Chania Agora</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Wochenmarkt Chania (samstags): Saisongemüse, frische Kräuter, lokaler Honig und Käse direkt vom Bauern.</div>
+        <div class="highlight-item">Shopping im Halepa-Viertel (Chania): Boutiquen, Kunsthandwerk, weniger Touristenfallen.</div>
+        <div class="highlight-item">Abendessen in Chania: Restaurant «To Maridaki» (frischer Fisch, venezianisches Viertel) — Reservierung empfohlen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 9 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">24</div>
+      <div class="day-label">Mai · So</div>
+      <div class="day-type-badge">🏖️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Elafonisi — Rosa Strand am Westzipfel</div>
+      <div class="drive">🚗 Ca. 75–85 Min. (Küstenstrasse, kurvenreich aber wunderschön)</div>
+      <div class="day-desc">Elafonisi gilt als einer der zehn schönsten Strände Europas. Das Besondere: der Sand ist rosa-weiss durch Muschelschalen. Die Lagune ist knieftief, das Wasser kristallklar. Im Mai kaum Touristen — ein Traumstrand zum richtigen Zeitpunkt.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Elafonisi+Beach+Crete" target="_blank">📍 Elafonisi Strand</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Rosa Sand: Millionen von Korallenresten und Muschelschalen geben dem Strand seine charakteristische Farbe.</div>
+        <div class="highlight-item">Die Lagune ist stellenweise nur knietief — ideales Watenwasser, auch für weniger Schwimmfreudige.</div>
+        <div class="highlight-item">Schnorcheln um die Insel Elafonisi (in 5 Min. zu Fuss erreichbar): Posidonia-Seegraswiesen und bunter Fisch.</div>
+        <div class="highlight-item">Rückfahrt über Paleochora (kleines Fischerstädtchen): Stopp für spätes Mittagessen empfohlen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 10 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">25</div>
+      <div class="day-label">Mai · Mo</div>
+      <div class="day-type-badge">🏔️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Lefka Ori — Wanderung im Weissgebirge</div>
+      <div class="drive">🚗 Ca. 45–60 Min. bis Askyfou-Plateau / Kallikratis</div>
+      <div class="day-desc">Die Weissgebirge (Lefka Ori) bieten spektakuläre Wanderungen ohne die Massen der Samaria-Schlucht. Das Askyfou-Plateau auf ~740 m ist ein idealer Ausgangspunkt für moderatere Touren mit gewaltigen Ausblicken. Im Mai liegt oben noch Schnee — beeindruckender Kontrast zum Meer unten.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Askyfou+Plateau+Crete" target="_blank">📍 Askyfou-Plateau</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Askyfou-Plateau: historische Stätte des kretischen Widerstands, kleines Kriegsmuseum, urige Dorfkafeneion.</div>
+        <div class="highlight-item">Wanderung Kallikratis–Imbros-Schlucht (kleine Samaria, 8 km, 3 Std.): kaum Touristen, wunderschöne Klamm.</div>
+        <div class="highlight-item">Panorama auf die Südküste und das Libysche Meer — an klaren Tagen ist der Kontrast Schnee/Meer phänomenal.</div>
+        <div class="highlight-item">Mittagessen in Hora Sfakion (Küstenort am Ende der Imbros-Schlucht): Sfakia-Pites (gefüllte Teigfladen mit Käse und Honig) — lokale Spezialität.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 11 -->
+
+  <div class="day-card type-free" data-type="free">
+    <div class="day-sidebar">
+      <div class="day-num">26</div>
+      <div class="day-label">Mai · Di</div>
+      <div class="day-type-badge">🏊</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Freier Tag — Pool & lokales Strandleben</div>
+      <div class="drive">Optional: Lokale Strände in der Nähe</div>
+      <div class="day-desc">Ein Faulenzer-Tag ist keine Niederlage, sondern kretische Lebensphilosophie (Siga-Siga: «langsam, langsam»). Pool, Aperol Spritz, lokale Tavernen zum Mittag. Wer mag: die nahen Strände Agia Marina oder Platanias sind mit dem Auto in 15–20 Min. erreichbar.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Agia+Marina+Beach+Chania+Crete" target="_blank">📍 Strand Agia Marina</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Strand Agia Marina (~15 Min.): langer Sandstrand, Sonnenliegen, mehrere Strandrestaurants — angenehm ohne übertriebenen Tourismusrummel im Mai.</div>
+        <div class="highlight-item">Platanias: lebhaftes Dorf, gute Einkaufsmöglichkeiten, abends schöne Strandpromenade.</div>
+        <div class="highlight-item">Siga-Siga-Abend: Raki (Tsikoudia), Mezedes, Taverna — der kretische Weg ins Wochenende.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 12 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">27</div>
+      <div class="day-label">Mai · Mi</div>
+      <div class="day-type-badge">🏛️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Rethymno — Kretas Renaissance-Stadt</div>
+      <div class="drive">🚗 Ca. 55–65 Min. (Autobahn E75 ostwärts)</div>
+      <div class="day-desc">Rethymno ist nach Chania die schönste Altstadt Kretas — mit dem Fortezza-Kastell auf dem Hügel, dem venezianischen Leuchtturm und dem besten erhaltenen osmanischen Viertel Griechenlands. Ein idealer Tagesausflug. Hinweis: Rethymno liegt auf dem Weg nach Heraklion — ideal zur Eingewöhnung für die Abreise.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Rethymno+Old+Town+Crete" target="_blank">📍 Rethymno Altstadt</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Fortezza-Kastell (16. Jh.): grösste venezianische Festungsanlage Kretas — Ausblick auf die Stadt und das Meer ist atemberaubend.</div>
+        <div class="highlight-item">Rimondi-Brunnen und venezianische Loggia: Herzstück der Altstadt, perfekte Flaniermeile.</div>
+        <div class="highlight-item">Archäologisches Museum Rethymno: hervorragende minoische Sammlung, gut beschriftet.</div>
+        <div class="highlight-item">Gastronomie: Fischrestaurants direkt am Hafen — frischer geht's nicht.</div>
+        <div class="highlight-item">Einkauf: Rethymno ist bekannt für Lederarbeiten, lokalen Likör (Rakomelo) und handgewebte Textilien.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 13 -->
+
+  <div class="day-card type-activity" data-type="activity">
+    <div class="day-sidebar">
+      <div class="day-num">28</div>
+      <div class="day-label">Mai · Do</div>
+      <div class="day-type-badge">⛪</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Halbinsel Akrotiri & Klöster</div>
+      <div class="drive">🚗 Ca. 20–30 Min. bis Akrotiri-Halbinsel</div>
+      <div class="day-desc">Die Halbinsel Akrotiri direkt vor den Toren Chanias ist ein gut gehütetes Geheimnis: Klöster aus dem 17. Jahrhundert, wilde Buchten, der Militärfriedhof von Souda (berührendste Kriegsgrabstätte Griechenlands) und der Strand Stavros — bekannt aus dem Film «Alexis Sorbas».</div>
+      <a class="map-link" href="https://maps.google.com/?q=Agia+Triada+Monastery+Akrotiri+Crete" target="_blank">📍 Kloster Agia Triada</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Kloster Gouverneto (1537): eines der ältesten auf Kreta, Wanderweg zur «Bärenhöhle» (Arkoudiotissa) — 30 Min. einfach.</div>
+        <div class="highlight-item">Kloster Agia Triada Tzagarolon: herrlich erhaltener venezianischer Klosterkomplex, eigener Olivenanbau und Weinproduktion — Direktverkauf.</div>
+        <div class="highlight-item">Strand Stavros: berühmt als Drehort von «Alexis Sorbas» (1964), halbkreisförmige Bucht, ruhig im Mai.</div>
+        <div class="highlight-item">Alliierten-Kriegsfriedhof Souda: über 1.500 Gräber britischer und Commonwealth-Soldaten — Besuch macht nachdenklich und ist bewegend.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 14 -->
+
+  <div class="day-card type-free" data-type="free">
+    <div class="day-sidebar">
+      <div class="day-num">29</div>
+      <div class="day-label">Mai · Fr</div>
+      <div class="day-type-badge">🛍️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Freier Tag — Abschluss-Shopping & Koffer packen</div>
+      <div class="drive">Kein Pflichtprogramm · Koffer packen für Abreise</div>
+      <div class="day-desc">Letzter voller Tag: letzte Besorgungen, Souvenirs, Mitbringsel. Nochmals die Altstadt Chanias, die Agora-Markthalle für Lebensmittel-Mitbringsel, und ein letztes Abschlussessen. Früh schlafen — morgen warten 2+ Stunden Fahrt nach Heraklion.</div>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Mitbringsel-Tipp: Kretisches Olivenöl extra vergine, Thymian-Honig, getrocknete Kräuter (Dittany/Diptam), Graviera-Käse vakuumverpackt.</div>
+        <div class="highlight-item">Letztes Abendessen: Taverna mit kretischer Musik — viele Restaurants haben freitags Live-Lyra-Musik.</div>
+        <div class="highlight-item">Abschluss am Hafen: Nachtspaziergang auf der venezianischen Mole — der würdigste Abschluss eines Kreta-Urlaubs.</div>
+        <div class="highlight-item">Planungstipp für morgen: Frühzeitig aufbrechen — von der Unterkunft nach Heraklion braucht ihr ~2 Std. 15 Min. Mindestens 2.5 Std. vor Abflug losfahren.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag 15 -->
+
+  <div class="day-card type-arrival" data-type="arrival">
+    <div class="day-sidebar">
+      <div class="day-num">30</div>
+      <div class="day-label">Mai · Sa</div>
+      <div class="day-type-badge">✈️</div>
+    </div>
+    <div class="day-body">
+      <div class="day-title">Abreise ab Heraklion — Αντίο, Κρήτη!</div>
+      <div class="drive">✈️ Unterkunft → Flughafen Heraklion (HER): ~2 Std. 15 Min. — früh losfahren!</div>
+      <div class="day-desc">Letztes Frühstück auf der Terrasse, Haus übergeben und frühzeitig Richtung Heraklion aufbrechen. Das Mietauto wird direkt am Flughafen HER zurückgegeben. Mindestens 3 Stunden vor Abflug losfahren, um entspannt anzukommen — Heraklion ist der grösste Flughafen Kretas, entsprechend mehr Betrieb.</div>
+      <a class="map-link" href="https://maps.google.com/?q=Heraklion+International+Airport+Crete" target="_blank">📍 Flughafen Heraklion</a>
+      <button class="toggle-btn" onclick="toggleHighlights(this)">Highlights verbergen ↑</button>
+      <div class="highlights">
+        <div class="highlight-item">Mietauto Rückgabe: Station direkt am Terminal HER — Abgabe einplanen und Tank vorher auffüllen (Tankstellen kurz vor dem Flughafen vorhanden).</div>
+        <div class="highlight-item">Optionaler Stopp auf dem Weg: Rethymno für einen letzten Kaffee — oder Knossos besichtigen, falls Zeit bleibt (direkt bei Heraklion, ~30 Min. vor Abflug-Puffer).</div>
+        <div class="highlight-item">Letzter Kaffee: griechischer Frappe im Flughafen-Café — ein letzter Schluck Hellas.</div>
+        <div class="highlight-item">Αντίο und Ευχαριστώ — Auf Wiedersehen und Danke, Kreta!</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>Kreta 2026 · 16.–30. Mai</strong> · Programm für 4 Personen · Flug via Heraklion (HER) · Unterkunft Region Chania<br>
+  Fahrzeiten ab Koordinaten 35.4479° N, 24.1897° E · Alle Angaben ohne Gewähr · <em>Καλό ταξίδι — Gute Reise!</em>
+</div>
+
+<script>
+  function toggleHighlights(btn) {
+    const h = btn.previousElementSibling;
+    const closed = h.classList.toggle('closed');
+    btn.textContent = closed ? 'Highlights anzeigen ↓' : 'Highlights verbergen ↑';
+  }
+
+  function filter(type, clickedBtn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    clickedBtn.classList.add('active');
+    document.querySelectorAll('.day-card').forEach(card => {
+      if (type === 'all') {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.toggle('hidden', card.dataset.type !== type);
+      }
+    });
+    // Hide/show week headers
+    document.querySelectorAll('.week-header').forEach(wh => {
+      if (type === 'all') { wh.classList.remove('hidden'); return; }
+      let next = wh.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('week-header')) {
+        if (!next.classList.contains('hidden')) hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      wh.classList.toggle('hidden', !hasVisible);
+    });
+  }
+</script>
+
+</body>
+</html>
