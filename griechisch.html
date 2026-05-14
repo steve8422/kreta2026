@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreta 2026 · Griechisch für Touristen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sea: #1a6b8a;
+    --sea-light: #e8f4f8;
+    --sand: #e8d5a3;
+    --sand-dark: #c4a96b;
+    --olive: #5a7a3a;
+    --white: #faf8f3;
+    --ink: #1c1a15;
+    --terracotta: #c4663a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--white); color: var(--ink); font-family: 'Crimson Pro', Georgia, serif; font-weight: 300; min-height: 100vh; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #0d3d52 0%, #1a6b8a 55%, #2899c4 100%);
+    padding: 48px 32px 40px; text-align: center;
+  }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--sand); margin-bottom: 14px; opacity: 0.9; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 58px); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 12px; }
+  .hero h1 em { font-style: italic; color: var(--sand); }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 28px; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 30px; padding: 9px 22px; color: #fff; text-decoration: none;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+  .back-link:hover { background: rgba(255,255,255,0.25); }
+
+  /* CONTENT */
+  .content { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* SECTION */
+  .section { margin-bottom: 40px; }
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark);
+    margin-bottom: 16px;
+  }
+  .section-icon { font-size: 28px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--sea); }
+
+  /* TABLE */
+  .phrase-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .phrase-table thead tr {
+    background: var(--sea); color: #fff;
+  }
+  .phrase-table thead th {
+    padding: 10px 14px; text-align: left; font-size: 11px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .phrase-table tbody tr { border-bottom: 1px solid #e8e4dc; transition: background 0.12s; }
+  .phrase-table tbody tr:hover { background: var(--sea-light); }
+  .phrase-table tbody tr:last-child { border-bottom: none; }
+  .phrase-table td { padding: 11px 14px; vertical-align: middle; line-height: 1.5; }
+  .phrase-table td:first-child { font-weight: 600; color: var(--ink); }
+  .phrase-table td:nth-child(2) { color: #1a1a6e; font-size: 16px; }
+  .phrase-table td:nth-child(3) { color: var(--terracotta); font-style: italic; }
+  .stress { font-weight: 800; font-style: normal; color: #8b2500; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Number special styling */
+  .num-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; background: var(--sand); border-radius: 50%;
+    font-weight: 700; font-size: 14px; color: var(--ink); margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .phrase-table td.num-cell { display: flex; align-items: center; }
+
+  /* TIP BOX */
+  .tip-box {
+    background: var(--sea-light); border-left: 4px solid var(--sea);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin-top: 16px;
+    font-size: 14px; line-height: 1.65; color: #2a4a5a;
+  }
+  .tip-box strong { color: var(--sea); }
+
+  /* ALPHABET NOTE */
+  .alpha-note {
+    background: #fff; border: 1px solid #e0dbd0; border-radius: 12px;
+    padding: 18px 22px; margin-bottom: 32px; font-size: 14px; line-height: 1.8;
+    color: #444;
+  }
+  .alpha-note strong { color: var(--ink); font-size: 15px; display: block; margin-bottom: 6px; }
+  .alpha-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .alpha-item { background: var(--sand); border-radius: 8px; padding: 4px 10px; font-size: 13px; color: var(--ink); font-weight: 600; }
+
+  /* FOOTER */
+  .footer { background: var(--ink); color: rgba(255,255,255,0.55); text-align: center; padding: 24px; font-size: 12px; letter-spacing: 0.5px; line-height: 1.8; }
+  .footer strong { color: var(--sand); }
+  .footer a { color: var(--sand-dark); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .phrase-table thead th:nth-child(2) { display: none; }
+    .phrase-table td:nth-child(2) { display: none; }
+    .phrase-table { font-size: 14px; }
+    .phrase-table td { padding: 9px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🇬🇷 Kreta 2026 · Sprachführer</div>
+  <h1>Griechisch für<br><em>Touristen</em></h1>
+  <p class="hero-sub">Die wichtigsten Wörter und Sätze für euren Kreta-Urlaub</p>
+  <a href="index.html" class="back-link">← Zurück zum Ferienprogramm</a>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- AUSSPRACHE-HINWEIS -->
+  <div class="alpha-note">
+    <strong>📖 Aussprache-Hinweise</strong>
+    Griechisch wird weitgehend so gesprochen, wie es geschrieben steht — konsequenter als Englisch oder Französisch.
+    Ein paar wichtige Lautregeln:
+    <div class="alpha-grid">
+      <span class="alpha-item">γ = ch/j (weich)</span>
+      <span class="alpha-item">χ = ch (wie Bach)</span>
+      <span class="alpha-item">θ = th (wie engl. "the")</span>
+      <span class="alpha-item">δ = dh (weiches d)</span>
+      <span class="alpha-item">ου = u</span>
+      <span class="alpha-item">αι = e</span>
+      <span class="alpha-item">ει/οι = i</span>
+      <span class="alpha-item">αυ = av/af</span>
+      <span class="alpha-item">ρ = gerolltes r</span>
+      <span class="alpha-item">Betonung: fett markiert</span>
+    </div>
+  </div>
+
+  <!-- ZAHLEN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🔢</div>
+      <div class="section-title">Zahlen 1–10</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>1 – eins</td><td>ένα</td><td><span class="stress">é</span>-na</td></tr>
+        <tr><td>2 – zwei</td><td>δύο</td><td><span class="stress">dhí</span>-o</td></tr>
+        <tr><td>3 – drei</td><td>τρία</td><td><span class="stress">trí</span>-a</td></tr>
+        <tr><td>4 – vier</td><td>τέσσερα</td><td><span class="stress">tés</span>-se-ra</td></tr>
+        <tr><td>5 – fünf</td><td>πέντε</td><td><span class="stress">pén</span>-de</td></tr>
+        <tr><td>6 – sechs</td><td>έξι</td><td><span class="stress">é</span>-xi</td></tr>
+        <tr><td>7 – sieben</td><td>επτά</td><td>ep-<span class="stress">tá</span></td></tr>
+        <tr><td>8 – acht</td><td>οκτώ</td><td>ok-<span class="stress">tó</span></td></tr>
+        <tr><td>9 – neun</td><td>εννέα</td><td>en-<span class="stress">né</span>-a</td></tr>
+        <tr><td>10 – zehn</td><td>δέκα</td><td><span class="stress">dhé</span>-ka</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GRÜSSE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">👋</div>
+      <div class="section-title">Grüsse & Höflichkeiten</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Guten Morgen</td><td>Καλημέρα</td><td>ka-li-<span class="stress">mé</span>-ra</td></tr>
+        <tr><td>Guten Tag</td><td>Καλημέρα / Χαίρετε</td><td>ka-li-<span class="stress">mé</span>-ra / <span class="stress">chéi</span>-re-te</td></tr>
+        <tr><td>Guten Abend</td><td>Καλησπέρα</td><td>ka-li-<span class="stress">spé</span>-ra</td></tr>
+        <tr><td>Gute Nacht</td><td>Καληνύχτα</td><td>ka-li-<span class="stress">níh</span>-ta</td></tr>
+        <tr><td>Hallo / Hi</td><td>Γεια σου / Γεια σας</td><td><span class="stress">ya</span> su / <span class="stress">ya</span> sas</td></tr>
+        <tr><td>Auf Wiedersehen</td><td>Αντίο</td><td>an-<span class="stress">dí</span>-o</td></tr>
+        <tr><td>Tschüss (informell)</td><td>Γεια</td><td><span class="stress">ya</span></td></tr>
+        <tr><td>Bitte</td><td>Παρακαλώ</td><td>pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Danke</td><td>Ευχαριστώ</td><td>ef-cha-ri-<span class="stress">stó</span></td></tr>
+        <tr><td>Danke sehr</td><td>Ευχαριστώ πολύ</td><td>ef-cha-ri-<span class="stress">stó</span> po-<span class="stress">lí</span></td></tr>
+        <tr><td>Ja</td><td>Ναι</td><td><span class="stress">ne</span></td></tr>
+        <tr><td>Nein</td><td>Όχι</td><td><span class="stress">ó</span>-chi</td></tr>
+        <tr><td>Entschuldigung</td><td>Συγγνώμη</td><td>si-<span class="stress">gnó</span>-mi</td></tr>
+        <tr><td>Wie geht es Ihnen?</td><td>Τι κάνετε;</td><td>ti <span class="stress">ká</span>-ne-te</td></tr>
+        <tr><td>Gut, danke</td><td>Καλά, ευχαριστώ</td><td>ka-<span class="stress">lá</span>, ef-cha-ri-<span class="stress">stó</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <strong>💡 Tipp:</strong> «Γεια σου» (ya su) ist die informelle Form (du), «Γεια σας» (ya sas) die höfliche Form (Sie/ihr). Im touristischen Kontext ist «ya sas» immer sicher.
+    </div>
+  </div>
+
+  <!-- PROST / GUTEN APPETIT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🥂</div>
+      <div class="section-title">Prost & Guten Appetit</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Prost! / Zum Wohl!</td><td>Στην υγειά μας!</td><td>stin i-<span class="stress">yá</span> mas</td></tr>
+        <tr><td>Prost! (informell)</td><td>Γεια μας!</td><td><span class="stress">ya</span> mas</td></tr>
+        <tr><td>Guten Appetit</td><td>Καλή όρεξη</td><td>ka-<span class="stress">lí</span> <span class="stress">ó</span>-re-xi</td></tr>
+        <tr><td>Es war köstlich</td><td>Ήταν νόστιμο</td><td><span class="stress">í</span>-tan <span class="stress">nós</span>-ti-mo</td></tr>
+        <tr><td>Sehr lecker!</td><td>Πολύ νόστιμο!</td><td>po-<span class="stress">lí</span> <span class="stress">nós</span>-ti-mo</td></tr>
+        <tr><td>Gute Reise!</td><td>Καλό ταξίδι!</td><td>ka-<span class="stress">ló</span> ta-<span class="stress">xí</span>-dhi</td></tr>
+        <tr><td>Viel Spass!</td><td>Καλή διασκέδαση!</td><td>ka-<span class="stress">lí</span> dha-<span class="stress">ské</span>-dha-si</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- IM RESTAURANT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🍽️</div>
+      <div class="section-title">Im Restaurant</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Einen Tisch für vier Personen, bitte</td><td>Ένα τραπέζι για τέσσερα άτομα, παρακαλώ</td><td><span class="stress">é</span>-na tra-<span class="stress">pé</span>-zi ya <span class="stress">tés</span>-se-ra <span class="stress">á</span>-to-ma, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Die Speisekarte, bitte</td><td>Τον κατάλογο, παρακαλώ</td><td>ton ka-<span class="stress">tá</span>-lo-go, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Was empfehlen Sie?</td><td>Τι συστήνετε;</td><td>ti si-<span class="stress">stí</span>-ne-te</td></tr>
+        <tr><td>Ich möchte bestellen</td><td>Θέλω να παραγγείλω</td><td><span class="stress">thé</span>-lo na pa-ran-<span class="stress">ghí</span>-lo</td></tr>
+        <tr><td>Ich bin Vegetarier/in</td><td>Είμαι χορτοφάγος</td><td><span class="stress">í</span>-me chor-to-<span class="stress">fá</span>-ghos</td></tr>
+        <tr><td>Ohne Fleisch, bitte</td><td>Χωρίς κρέας, παρακαλώ</td><td>cho-<span class="stress">rís</span> <span class="stress">kré</span>-as, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Wasser, bitte</td><td>Νερό, παρακαλώ</td><td>ne-<span class="stress">ró</span>, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Ein Bier, bitte</td><td>Μία μπύρα, παρακαλώ</td><td><span class="stress">mí</span>-a <span class="stress">bí</span>-ra, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Ein Glas Wein</td><td>Ένα ποτήρι κρασί</td><td><span class="stress">é</span>-na po-<span class="stress">tí</span>-ri kra-<span class="stress">sí</span></td></tr>
+        <tr><td>Die Rechnung, bitte</td><td>Τον λογαριασμό, παρακαλώ</td><td>ton lo-gha-rias-<span class="stress">mó</span>, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Zusammen oder getrennt?</td><td>Μαζί ή χωριστά;</td><td>ma-<span class="stress">zí</span> í cho-ri-<span class="stress">stá</span></td></tr>
+        <tr><td>Stimmt so (Trinkgeld)</td><td>Κρατήστε τα ρέστα</td><td>kra-<span class="stress">tís</span>-te ta <span class="stress">rés</span>-ta</td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <strong>💡 Tipp:</strong> In kretischen Tavernen bringt der Wirt am Ende oft gratis Tsikoudia (Raki) und ein kleines Dessert — das ist Tradition und kein Zufall. Ein herzliches «Ευχαριστώ!» (ef-cha-ri-stó) freut immer.
+    </div>
+  </div>
+
+  <!-- EINKAUFEN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🛍️</div>
+      <div class="section-title">Beim Einkaufen</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Wie viel kostet das?</td><td>Πόσο κάνει αυτό;</td><td><span class="stress">pó</span>-so <span class="stress">ká</span>-ni af-<span class="stress">tó</span></td></tr>
+        <tr><td>Das ist zu teuer</td><td>Είναι πολύ ακριβό</td><td><span class="stress">í</span>-ne po-<span class="stress">lí</span> a-kri-<span class="stress">vó</span></td></tr>
+        <tr><td>Haben Sie etwas Günstigeres?</td><td>Έχετε κάτι πιο φτηνό;</td><td><span class="stress">é</span>-che-te <span class="stress">ká</span>-ti pio fti-<span class="stress">nó</span></td></tr>
+        <tr><td>Ich nehme das</td><td>Το παίρνω αυτό</td><td>to <span class="stress">pér</span>-no af-<span class="stress">tó</span></td></tr>
+        <tr><td>Kann ich mit Karte zahlen?</td><td>Μπορώ να πληρώσω με κάρτα;</td><td>bo-<span class="stress">ró</span> na pli-<span class="stress">ró</span>-so me <span class="stress">kár</span>-ta</td></tr>
+        <tr><td>Wo ist die Kasse?</td><td>Πού είναι το ταμείο;</td><td>pu <span class="stress">í</span>-ne to ta-<span class="stress">mí</span>-o</td></tr>
+        <tr><td>Eine Tüte, bitte</td><td>Μία σακούλα, παρακαλώ</td><td><span class="stress">mí</span>-a sa-<span class="stress">kú</span>-la, pa-ra-ka-<span class="stress">ló</span></td></tr>
+        <tr><td>Ich schaue nur</td><td>Απλώς κοιτάω</td><td>ap-<span class="stress">lós</span> ki-<span class="stress">tá</span>-o</td></tr>
+        <tr><td>Haben Sie das in einer anderen Grösse?</td><td>Το έχετε σε άλλο νούμερο;</td><td>to <span class="stress">é</span>-che-te se <span class="stress">á</span>-lo <span class="stress">nú</span>-me-ro</td></tr>
+        <tr><td>Öffnungszeiten?</td><td>Ώρες λειτουργίας;</td><td><span class="stress">ó</span>-res li-tur-<span class="stress">yí</span>-as</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ORIENTIERUNG -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🗺️</div>
+      <div class="section-title">Orientierung & Notfälle</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Wo ist …?</td><td>Πού είναι …;</td><td>pu <span class="stress">í</span>-ne</td></tr>
+        <tr><td>Wie komme ich zum Strand?</td><td>Πώς πάω στην παραλία;</td><td>pos <span class="stress">pá</span>-o stin pa-ra-<span class="stress">lí</span>-a</td></tr>
+        <tr><td>Links / Rechts / Geradeaus</td><td>Αριστερά / Δεξιά / Ευθεία</td><td>a-ris-te-<span class="stress">rá</span> / dhek-si-<span class="stress">á</span> / ef-<span class="stress">thí</span>-a</td></tr>
+        <tr><td>Wie weit ist es?</td><td>Πόσο μακριά είναι;</td><td><span class="stress">pó</span>-so ma-kri-<span class="stress">á</span> <span class="stress">í</span>-ne</td></tr>
+        <tr><td>Ich brauche Hilfe</td><td>Χρειάζομαι βοήθεια</td><td>chri-<span class="stress">á</span>-zo-me vo-<span class="stress">í</span>-thi-a</td></tr>
+        <tr><td>Rufen Sie einen Arzt!</td><td>Φωνάξτε γιατρό!</td><td>fo-<span class="stress">náx</span>-te yia-<span class="stress">tró</span></td></tr>
+        <tr><td>Polizei</td><td>Αστυνομία</td><td>as-ti-no-<span class="stress">mí</span>-a</td></tr>
+        <tr><td>Krankenhaus</td><td>Νοσοκομείο</td><td>no-so-ko-<span class="stress">mí</span>-o</td></tr>
+        <tr><td>Apotheke</td><td>Φαρμακείο</td><td>far-ma-<span class="stress">kí</span>-o</td></tr>
+        <tr><td>Ich verstehe nicht</td><td>Δεν καταλαβαίνω</td><td>dhen ka-ta-la-<span class="stress">vé</span>-no</td></tr>
+        <tr><td>Sprechen Sie Deutsch/Englisch?</td><td>Μιλάτε Γερμανικά/Αγγλικά;</td><td>mi-<span class="stress">lá</span>-te yer-ma-ni-<span class="stress">ká</span> / an-gli-<span class="stress">ká</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <strong>💡 Notruf Griechenland:</strong> Allgemeiner Notruf <strong>112</strong> · Polizei <strong>100</strong> · Feuerwehr <strong>199</strong> · Ambulanz <strong>166</strong>
+    </div>
+  </div>
+
+  <!-- AM STRAND -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🏖️</div>
+      <div class="section-title">Am Strand & unterwegs</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Strand</td><td>Παραλία</td><td>pa-ra-<span class="stress">lí</span>-a</td></tr>
+        <tr><td>Meer</td><td>Θάλασσα</td><td><span class="stress">thá</span>-la-sa</td></tr>
+        <tr><td>Sonnenschirm</td><td>Ομπρέλα παραλίας</td><td>om-<span class="stress">bré</span>-la pa-ra-<span class="stress">lí</span>-as</td></tr>
+        <tr><td>Liegestuhl</td><td>Ξαπλώστρα</td><td>xap-<span class="stress">lós</span>-tra</td></tr>
+        <tr><td>Das Wasser ist schön warm</td><td>Το νερό είναι ωραία ζεστό</td><td>to ne-<span class="stress">ró</span> <span class="stress">í</span>-ne o-<span class="stress">ré</span>-a zes-<span class="stress">tó</span></td></tr>
+        <tr><td>Kann man hier schwimmen?</td><td>Μπορεί κανείς να κολυμπήσει εδώ;</td><td>bo-<span class="stress">rí</span> ka-<span class="stress">nís</span> na ko-lim-<span class="stress">bí</span>-si e-<span class="stress">dhó</span></td></tr>
+        <tr><td>Parkplatz</td><td>Χώρος στάθμευσης</td><td><span class="stress">chó</span>-ros <span class="stress">státh</span>-mef-sis</td></tr>
+        <tr><td>Eingang / Ausgang</td><td>Είσοδος / Έξοδος</td><td><span class="stress">í</span>-so-dhos / <span class="stress">é</span>-xo-dhos</td></tr>
+        <tr><td>Geöffnet / Geschlossen</td><td>Ανοιχτό / Κλειστό</td><td>a-nich-<span class="stress">tó</span> / klis-<span class="stress">tó</span></td></tr>
+        <tr><td>WC / Toilette</td><td>Τουαλέτα / WC</td><td>tua-<span class="stress">lé</span>-ta</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- KRETISCHE SPEZIALITÄTEN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🫒</div>
+      <div class="section-title">Kretische Spezialitäten — Vokabular</div>
+    </div>
+    <table class="phrase-table">
+      <thead><tr><th>Deutsch</th><th>Griechisch</th><th>Aussprache</th></tr></thead>
+      <tbody>
+        <tr><td>Olivenöl</td><td>Ελαιόλαδο</td><td>e-le-<span class="stress">ó</span>-la-dho</td></tr>
+        <tr><td>Oliven</td><td>Ελιές</td><td>e-<span class="stress">liés</span></td></tr>
+        <tr><td>Honig</td><td>Μέλι</td><td><span class="stress">mé</span>-li</td></tr>
+        <tr><td>Käse (allg.)</td><td>Τυρί</td><td>ti-<span class="stress">rí</span></td></tr>
+        <tr><td>Feta-Käse</td><td>Φέτα</td><td><span class="stress">fé</span>-ta</td></tr>
+        <tr><td>Graviera (kret. Hartkäse)</td><td>Γραβιέρα</td><td>gra-<span class="stress">viér</span>-a</td></tr>
+        <tr><td>Dakos (Zwieback-Salat)</td><td>Ντάκος</td><td><span class="stress">ndá</span>-kos</td></tr>
+        <tr><td>Tsikoudia / Raki</td><td>Τσικουδιά / Ρακή</td><td>tsi-ku-<span class="stress">dhiá</span> / ra-<span class="stress">kí</span></td></tr>
+        <tr><td>Gegrillter Fisch</td><td>Ψητό ψάρι</td><td>psi-<span class="stress">tó</span> <span class="stress">psá</span>-ri</td></tr>
+        <tr><td>Lamm</td><td>Αρνί</td><td>ar-<span class="stress">ní</span></td></tr>
+        <tr><td>Mezedes (Vorspeisen)</td><td>Μεζέδες</td><td>me-<span class="stress">zé</span>-dhes</td></tr>
+        <tr><td>Souvlaki</td><td>Σουβλάκι</td><td>suv-<span class="stress">lá</span>-ki</td></tr>
+        <tr><td>Spanakopita (Spinatkuchen)</td><td>Σπανακόπιτα</td><td>spa-na-<span class="stress">kó</span>-pi-ta</td></tr>
+        <tr><td>Baklava</td><td>Μπακλαβάς</td><td>bak-la-<span class="stress">vás</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <strong>💡 Kretische Küche:</strong> Kreta gilt als Wiege der mediterranen Diät. Viel Olivenöl, frisches Gemüse, Hülsenfrüchte und Fisch — und alles mit einem Schuss Tsikoudia. Kein Wunder, dass die Kreter zu den Langlebigsten der Welt gehören.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Kreta 2026 · 16.–30. Mai</strong> · 4 Personen · Flüge WK350/WK351 via Heraklion (HER)<br>
+  <a href="index.html">← Zurück zum Ferienprogramm</a> &nbsp;·&nbsp; Alle Angaben ohne Gewähr<br>
+  <em>Καλό ταξίδι — Gute Reise!</em>
+</div>
+
+</body>
+</html>
